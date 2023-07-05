@@ -32,6 +32,7 @@ require_once('init.php');
                 <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/PHP/gallerie_photo/subscription.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>subscription.php">Inscription</a> 
                 <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/PHP/gallerie_photo/themes.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>themes.php">Thèmes</a>
                 <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/PHP/gallerie_photo/connexion.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>connexion.php">Connexion</a>
+                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/PHP/gallerie_photo/contact.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>contact.php">Contact</a>
                  
             <?php endif ?> 
             
