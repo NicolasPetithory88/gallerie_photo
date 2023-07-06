@@ -142,26 +142,27 @@
         }
         
     // Add a comment    
-        if(userConnected()){
-
-        echo '<form class="flex column w_50" action="" method="POST"> 
-
-            <textarea class="p_1" name="content" id="content" cols="30" rows="8" placeholder="Ajouter un commentaire"></textarea>
-
-            <button class="self_center m_tb_2" type="submit">
-                Ajouter
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-
-        </form>';
+        if(!isset($_GET['action'])){
+            if(userConnected()){
+                echo '<form class="flex column w_50" action="" method="POST"> 
+    
+                    <textarea class="p_1" name="content" id="content" cols="30" rows="8" placeholder="Ajouter un commentaire"></textarea>
+    
+                    <button class="self_center m_tb_2" type="submit">
+                        Ajouter
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+    
+                </form>';
+            }
+            else{  
+                echo '<p class="m_b_2"><a class="decoration_none c_black bold" href="connexion.php">Connectez-vous</a> pour ajouter un commentaire</p>';           
+            }
         }
-        else{
-            echo '<p class="m_b_2"><a class="decoration_none c_black bold" href="connexion.php">Connectez-vous</a> pour ajouter un commentaire</p>';
-        }
-
+        
     // Display Comments
         // Fetch comments and comments data
         $reqComments = $pdo->prepare("SELECT * FROM comment WHERE id_picture = :currentPictureId ORDER BY created_at DESC");
