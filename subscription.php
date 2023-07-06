@@ -12,10 +12,13 @@ if($_POST){
     if(!empty($_POST['nickname'])){
         $nickname = $_POST['nickname'];
             if(strlen($nickname) < 3 || strlen($nickname)>20){
-             $error .= '<div class="c_red font_1_2 m_tb_1">Votre pseudo doit contenir entre 3 et 20 characteres'.'</div>';}
-    
-            $numberOfNicknames = $pdo->query("SELECT * FROM membre WHERE nickname = '$nickname'");
-            if($numberOfNicknames->rowCount() > 0){
+             $error .= '<div class="c_red font_1_2 m_tb_1">Votre pseudo doit contenir entre 3 et 20 characteres'.'</div>';
+            }  
+             $stmt = $pdo->prepare("SELECT * FROM membre WHERE nickname = :nickname");
+             $stmt->bindParam(':nickname', $nickname);
+             $stmt->execute();
+             $numberOfNicknames = $stmt->rowCount();
+            if($numberOfNicknames > 0){
                 $error .= '<div class="c_red font_1_2 m_tb_1">Votre pseudo est déja utilisé'.'</div>';
             }        
     }
@@ -39,10 +42,14 @@ if($_POST){
         if (!preg_match('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/', $email)) {
             $error .= '<div class="c_red font_1_2 m_tb_1">Votre email n\'est pas valide'.'</div>';
         }
-        $numberOfEmail = $pdo->query("SELECT * FROM membre WHERE email = '$email'");
-            if($numberOfEmail->rowCount() > 0){
-                $error .= '<div class="c_red font_1_2 m_tb_1">Cet adresse email est déja utilisée'.'</div>';
-            }   
+        $stmt2 = $pdo->prepare("SELECT * FROM membre WHERE email = :email");
+        $stmt2->bindParam(':email', $email);
+        $stmt2->execute();
+        $numberOfEmail = $stmt->rowCount();
+
+        if($numberOfEmail > 0){
+            $error .= '<div class="c_red font_1_2 m_tb_1">Cet adresse email est déja utilisée'.'</div>';
+        }   
     }
     else{
         $error .= '<div class="c_red font_1_2 m_tb_1">Un email est obligatoire</div>'; 
@@ -50,7 +57,12 @@ if($_POST){
     
     if($error === ''){
         $success .= '<div class="bg_green c_white p_1_2 m_tb_1 font_1_2">Votre inscription a bien été prise en compte</div>';
-        $pdo->query("INSERT INTO membre (nickname,email,password) VALUES ('$nickname','$email','$passwordHash')");
+        $stmt3 = $pdo->prepare("INSERT INTO membre (nickname, email, password) VALUES (:nickname, :email, :passwordHash)");
+        $stmt3->bindParam(':nickname', $nickname);
+        $stmt3->bindParam(':email', $email);
+        $stmt3->bindParam(':passwordHash', $passwordHash);
+        $stmt3->execute();
+
         header('Refresh:3;url=connexion.php');
     }
     }

@@ -40,7 +40,11 @@ if($_POST){
     
     if($error === ''){
         $success .= '<div class="bg_green c_white p_1_2 m_tb_1 font_1_2">Votre message a bien été envoyé</div>';
-        $pdo->query("INSERT INTO contact_message (author,email,message) VALUES ('$nickname','$email','$content')");
+        $stmt = $pdo->prepare("INSERT INTO contact_message (author, email, message) VALUES (:nickname, :email, :content)");
+        $stmt->bindParam(':nickname', $nickname);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':content', $content);
+        $stmt->execute([':nickname' => $nickname,':email' => $email, ':content' => $content]);
         $me = 'hpnyckit@gmail.com'; 
         sendmymail('Les Voyages de Philippe', $email, 'Message de '.$nickname, $content);
         header('Refresh:3;url=index.php');
@@ -55,6 +59,7 @@ if($_POST){
             <h1 class="self_center m_b_2">Me Contacter</h1>
             <p class="font_1_2" >Contactez-moi par téléphone ou en envoyant un message.</p>
             <p class="font_1_2 m_b_2" >Philippe Petithory : 06 50 03 97 03</p>
+            <!-- Contact form -->
             <form class="flex column" action="" method="POST"> 
 
                 <?= $error; ?>

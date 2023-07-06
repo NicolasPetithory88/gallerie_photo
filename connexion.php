@@ -12,49 +12,53 @@ if(isset($_GET['action']) && $_GET['action'] == 'deconnexion'){
 
 // Redirect to main page when connected
 if(userConnected()){
-    header('Location: themes.php');  
+    header('Location: index.php');  
 };
 
 // Connexion management / session creation
-if($_POST){
-    if(empty($_POST['nickname'])){
-        $error .= '<div class="erreur">Veuillez renseigner votre pseudo'.'</div>'; 
-    }
-    else{
+if ($_POST) {
+
+    if (empty($_POST['nickname'])) {
+        $error .= '<div class="c_red font_1_2 m_tb_1">Veuillez renseigner votre pseudo'.'</div>';
+    } else {
         $nickname = $_POST['nickname'];
-        $nicknameBase = $pdo->query("SELECT * FROM membre WHERE nickname = '$nickname'");
-        if($nicknameBase->rowCount() > 0){
-            $membre = $nicknameBase->fetchALL(PDO::FETCH_ASSOC);
-            if($membre[0]['nickname']==$nickname){
-            // Verification du mdp
-                if(!empty($_POST['password'])){
-                    if(password_verify($_POST['password'],  $membre[0]['password'])){
-                        $success .= 'Connexion validée';                       
-           
-                        $_SESSION['membre']['id_membre'] = $membre[0]['id_membre'];
-                        $_SESSION['membre']['nickname'] = $membre[0]['nickname'];
-                        $_SESSION['membre']['password'] = $membre[0]['password'];
-                        $_SESSION['membre']['email'] = $membre[0]['email'];
-                        $_SESSION['membre']['status'] = $membre[0]['status'];
+        $stmt = $pdo->prepare("SELECT * FROM membre WHERE nickname = :nickname");
+        $stmt->execute([':nickname' => $nickname]);
+        $membre = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($stmt->rowCount() > 0) {
+            if ($membre['nickname'] == $nickname) {
+                // Password checking
+                if (!empty($_POST['password'])) {
+                    if (password_verify($_POST['password'], $membre['password'])) {
+                        $success .= 'Connexion validée';
+
+                        $_SESSION['membre']['id_membre'] = $membre['id_membre'];
+                        $_SESSION['membre']['nickname'] = $membre['nickname'];
+                        $_SESSION['membre']['password'] = $membre['password'];
+                        $_SESSION['membre']['email'] = $membre['email'];
+                        $_SESSION['membre']['status'] = $membre['status'];
                         header('Location: index.php');
-                    }    
+                    }
+                    else{
+                        $error .= '<div class="c_red font_1_2 m_tb_1">Le mot de passe est incorrect'.'</div>';
+                    }
+                } 
+                else {
+                    $error .= '<div class="c_red font_1_2 m_tb_1">Veuillez renseigner votre mot de passe'.'</div>';
                 }
-                else{
-                    $error .= '<div class="erreur">Veuillez renseigner votre mot de passe'.'</div>';
-                }
-            }
-            else{
-                $error .= '<div class="erreur">Ce pseudo n\'éxiste pas'.'</div>';    
-            }
+            }           
         }
-   
+        else {
+            $error .= '<div class="c_red font_1_2 m_tb_1">Ce pseudo n\'existe pas'.'</div>';
+        }
     }
 }
 
 
 ?>  
  
-<div class="flex column align_center m_tb_2 flex_1">
+<div class="flex column align_center justify_center flex_1">
     <h1 class="font_20 m_b_2">Connectez-vous à votre compte</h1>  
     <!-- Connexion form -->
     <form class="flex column w_40" action="" method="POST"> 

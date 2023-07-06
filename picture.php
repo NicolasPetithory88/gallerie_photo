@@ -28,8 +28,10 @@
         // comment deletion
         if($action == 'delete'){
 
-            if($comment && $comment['author'] == $_SESSION['membre']['nickname']) {
-                $pdo->query("DELETE FROM comment WHERE id_comment = '$id_comment'");
+            if($comment && $comment['author'] == $_SESSION['membre']['nickname'] || $comment && userisAdmin()) {
+                $commentDelete = $pdo->prepare("DELETE FROM comment WHERE id_comment = :id_comment");
+                $commentDelete->bindParam(':id_comment', $id_comment);
+                $commentDelete->execute();
             }
             header('Location: picture.php?id_picture='.$comment['id_picture']);
             exit;
@@ -48,7 +50,10 @@
                     $error = '<div class="c_red font_1_2 m_tb_1">Votre commentaire est vide</div>'; 
                 }
                 if($error === ''){
-                    $pdo->query("UPDATE comment SET content = '$content' WHERE id_comment = '$id_comment'");
+                    $commentEdit = $pdo->prepare("UPDATE comment SET content = :content WHERE id_comment = :id_comment");
+                    $commentEdit->bindParam(':content', $content);
+                    $commentEdit->bindParam(':id_comment', $id_comment);
+                    $commentEdit->execute();
                     header('Location: picture.php?id_picture='.$comment['id_picture']);
                     exit;
                 }
@@ -92,15 +97,24 @@
             $currentPictureId = $_GET['id_picture'];
 
             // Fetch the current picture and save its id_theme
-            $reqPicture = $pdo->query("SELECT * FROM picture WHERE id_picture = '$currentPictureId'");
+            $reqPicture = $pdo->prepare("SELECT * FROM picture WHERE id_picture = :currentPictureId");
+            $reqPicture->bindParam(':currentPictureId', $currentPictureId);
+            $reqPicture->execute();
             $currentPicture = $reqPicture->fetch(PDO::FETCH_ASSOC);
             $idTheme = $currentPicture['id_theme'];
 
-            // Fetch the previous and next picture
-            $reqPrevPicture = $pdo->query("SELECT * FROM picture WHERE id_theme = '$idTheme' AND id_picture < '$currentPictureId' ORDER BY id_picture DESC LIMIT 1");
+            // Fetch the previous picture
+            $reqPrevPicture = $pdo->prepare("SELECT * FROM picture WHERE id_theme = :idTheme AND id_picture < :currentPictureId ORDER BY id_picture DESC LIMIT 1");
+            $reqPrevPicture->bindParam(':idTheme', $idTheme);
+            $reqPrevPicture->bindParam(':currentPictureId', $currentPictureId);
+            $reqPrevPicture->execute();
             $prevPicture = $reqPrevPicture->fetch(PDO::FETCH_ASSOC);
 
-            $reqNextPicture = $pdo->query("SELECT * FROM picture WHERE id_theme = '$idTheme' AND id_picture > '$currentPictureId' ORDER BY id_picture ASC LIMIT 1");
+            // Fetch the next picture
+            $reqNextPicture = $pdo->prepare("SELECT * FROM picture WHERE id_theme = :idTheme AND id_picture > :currentPictureId ORDER BY id_picture ASC LIMIT 1");
+            $reqNextPicture->bindParam(':idTheme', $idTheme);
+            $reqNextPicture->bindParam(':currentPictureId', $currentPictureId);
+            $reqNextPicture->execute();
             $nextPicture = $reqNextPicture->fetch(PDO::FETCH_ASSOC);
             
             // previous picture arrow management
@@ -150,7 +164,9 @@
 
     // Display Comments
         // Fetch comments and comments data
-        $reqComments = $pdo->query("SELECT * FROM comment WHERE id_picture = '$currentPictureId' ORDER BY created_at DESC ");
+        $reqComments = $pdo->prepare("SELECT * FROM comment WHERE id_picture = :currentPictureId ORDER BY created_at DESC");
+        $reqComments->bindParam(':currentPictureId', $currentPictureId);
+        $reqComments->execute();
         $comments = $reqComments->fetchAll(PDO::FETCH_ASSOC);
         echo '<div class="w_50 flex column">
 
@@ -186,7 +202,7 @@
                 echo '
                     <a class="decoration_none" href="picture.php?id_picture='.$currentPictureId.'&action=edit&id_comment='.$comment['id_comment'].'">🖊️</a>';
             }
-            // comment delete lm*ink
+            // comment delete link
             if (userConnected() && $comment['author'] == $_SESSION['membre']['nickname'] || userIsAdmin()) {
                 echo '<a class="decoration_none" href="picture.php?id_picture='.$currentPictureId.'&action=delete&id_comment='.$comment['id_comment'].'" onclick="return confirmDelete();">🚮</a>';
             }

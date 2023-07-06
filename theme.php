@@ -10,15 +10,21 @@ require_once('./inc/init.php');
     if(!isset($_GET['id_theme'])){
         header('Location:index.php');
     }
-    // Gathering theme data
     else{
-        $reqtheme = $pdo->query("SELECT * FROM theme WHERE id_theme = '$_GET[id_theme]'");
+        // Gathering theme data
+        $reqTheme = $pdo->prepare("SELECT * FROM theme WHERE id_theme = :id_theme");
+        $reqTheme->bindParam(':id_theme', $_GET['id_theme']);
+        $reqTheme->execute();
         $theme = $reqtheme->fetch(PDO::FETCH_ASSOC);
+        // Title and description
         echo '<h1 class="font_3">'.$theme['title'].'</h1>
               <p class="m_t_1 font_1_2">'.$theme['description'].'</p>
               <div class="flex wrap gap_1 w_100 justify_center m_tb_2">';
-        $reqpictures = $pdo->query("SELECT * FROM picture WHERE id_theme = '$_GET[id_theme]'");
-        $pictures = $reqpictures->fetchAll(PDO::FETCH_ASSOC);
+        // Gathering theme's pictures
+        $reqPictures = $pdo->prepare("SELECT * FROM picture WHERE id_theme = :id_theme");
+        $reqPictures->bindParam(':id_theme', $_GET['id_theme']);
+        $reqPictures->execute();
+        $pictures = $reqPictures->fetchAll(PDO::FETCH_ASSOC);
         // Pictures display
         foreach ($pictures as $key => $picture) { 
             echo '<div class="flex column w_20 justify_center align_center">';
