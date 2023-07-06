@@ -53,7 +53,7 @@ if($_POST){
     <div class="flex w_100 space_around">
         <div class="flex column w_40">
             <h1 class="self_center m_b_2">Me Contacter</h1>
-            <p class="font_1_2" >Contactez-moi par téléphone ou en envoyant un message</p>
+            <p class="font_1_2" >Contactez-moi par téléphone ou en envoyant un message.</p>
             <p class="font_1_2 m_b_2" >Philippe Petithory : 06 50 03 97 03</p>
             <form class="flex column" action="" method="POST"> 
 

@@ -127,6 +127,10 @@ body, html {
     background-color: #bab2b5;
 }
 
+.bg_black{
+    background-color: black;
+}
+
 .c_white{
     color: white;
 }
@@ -286,8 +290,16 @@ color :#bab2b5;
     padding: 1rem 2rem;
 }
 
+.p_b_1{
+    padding-bottom: 1rem;
+}
+
 .gap_1{
     gap: 1rem;
+}
+
+.inline_block{
+    display: inline-block;
 }
 
 
@@ -315,6 +327,10 @@ color :#bab2b5;
 
 .border_none{
     border: none;
+}
+
+.border_1_black{
+    border: 1rem solid black;
 }
 
 .font_08{
