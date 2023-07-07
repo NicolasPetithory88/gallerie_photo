@@ -81,10 +81,11 @@ if($_POST){
     if($error === ''){
         global $img_bdd;
         $success .= '<div class="bg_green c_white p_1_2 m_tb_1 font_1_2">Votre photo a bien été modifiée</div>';
-        $stmt = $pdo->prepare("UPDATE picture SET title = :title, description = :description, link = :link WHERE id_picture = :id_picture");
+        $stmt = $pdo->prepare("UPDATE picture SET link = :link, id_theme = :id_theme, title = :title, description = :description WHERE id_picture = :id_picture");
+        $stmt->bindParam(':link', $img_bdd, PDO::PARAM_STR);
+        $stmt->bindParam(':id_theme', $id_theme, PDO::PARAM_STR);
         $stmt->bindParam(':title', $title, PDO::PARAM_STR);
         $stmt->bindParam(':description', $description, PDO::PARAM_STR);
-        $stmt->bindParam(':link', $img_bdd, PDO::PARAM_STR);
         $stmt->bindParam(':id_picture', $_GET['id_picture'], PDO::PARAM_INT);
         $stmt->execute();
         header('Refresh:3;url=picture_management.php');

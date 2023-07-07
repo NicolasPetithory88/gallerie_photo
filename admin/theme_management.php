@@ -118,6 +118,9 @@ if($_POST){
                 if ($key == 'picture_link'){
                     echo '<td class="p_l_1 line_h_1"><img class="h_5 w_auto" src="'. $data.'"></td>';
                 }
+                else if ($key == 'description' && !$data){
+                    echo '<td class="p_l_1"></td>';
+                }
                 else{
                     echo '<td class="p_l_1">'. substr($data,0,20).'</td>';
                 }
