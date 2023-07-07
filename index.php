@@ -4,7 +4,9 @@ require_once('./inc/init.php');
 ?>  
 
 <div class="flex column justify_center align_center flex_1">
-    <p class="m_2 w_80">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
+    <p class="font_1_2 w_80 text_center m_t_2">Quel bonheur de pouvoir sortir de l'anonymat quelques photos issues de mes passions pour l'asie et l'exploration urbaine (Urbex).</p>
+    <p class="font_1_2 w_80 text_center">Un immense merci à Nicolas le créateur de ce site.</p>
+    <p class="font_1_2 m_b_2 w_80 text_center">Un immense merci à Marie, fidèle partenaire de tous mes voyages.</p>
     <div id="carousel"></div>
 
 
