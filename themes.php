@@ -17,9 +17,11 @@ $req_themes = $pdo->query("SELECT * FROM theme");
         <?php 
         foreach ($themes as $key => $value) {
             echo  '<li class="flex column w_20 justify_center align_center"> 
-            <a href="theme.php?id_theme='.$value['id_theme'].'"><img class="w_100 h_auto" src="'. $value['picture_link'].'"></a>
+            <a href="theme.php?id_theme='.$value['id_theme'].'"><img class="w_auto h_15r" src="'. $value['picture_link'].'"></a>
             <a class="decoration_none c_black font_1_2 bold" href="theme.php?id_theme='.$value['id_theme'].'">'.$value['title'].'</a>
-            </li>'; 
+            </li>';
+             
+            
         }
         ?>
     </ul>

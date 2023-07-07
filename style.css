@@ -108,6 +108,14 @@ body, html {
     height: 100%;
 }
 
+.h_40{
+    height: 40%;
+}
+
+.h_20{
+    height: 20%;
+}
+
 .h_2{
     height: 2rem;
 }
@@ -120,12 +128,36 @@ body, html {
     height: 5rem;
 }
 
+.h_15r{
+    height: 15rem;
+}
+
+.h_50r{
+    height: 50rem;
+}
+
+.min_h_15r{
+    height: 15rem;
+}
+
 .h_auto{
     height: auto;
 }
 
 .min_h_100{
     min-height: 100%;
+}
+
+.max_h_15r{
+    max-height: 15rem;
+}
+
+.max_w_20{
+    max-width: 20%;
+}
+
+.max_w_100{
+    max-width: 100%;
 }
 
 .vertical_align_top{
@@ -410,6 +442,10 @@ color :#bab2b5;
     right: 10%;
 }
 
+.left_0{
+    left: 5%;
+}
+
 .left_5{
     left: 5%;
 }
@@ -426,11 +462,34 @@ color :#bab2b5;
     bottom: 0;
 }
 
+.overflow_hidden{
+    overflow: hidden;
+}
 
 /* Custom */
 
+.image-container {
+    width: 20%;
+    max-height: 20%;
+    position: relative;
+    overflow: hidden;
+  }
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
 .bg_cover{
     background-size: cover;
+}
+
+.object_fit_cover{
+    object-fit: cover;
 }
 
 .close_button {

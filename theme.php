@@ -27,8 +27,8 @@ require_once('./inc/init.php');
         $pictures = $reqPictures->fetchAll(PDO::FETCH_ASSOC);
         // Pictures display
         foreach ($pictures as $key => $picture) { 
-            echo '<div class="flex column w_20 justify_center align_center">';
-            echo '<a href="picture.php?id_picture=' . $picture['id_picture'].'"><img class="w_100 h_auto" src="'.$picture['link'].'" width="200px"></a>
+            echo '<div class="w_20 h_15r flex justify_center">';
+                echo '<a href="picture.php?id_picture=' . $picture['id_picture'].'"><img class="w_auto h_100" src="'.$picture['link'].'"></a>
             </div>';
         }    
         echo '</div>';    
