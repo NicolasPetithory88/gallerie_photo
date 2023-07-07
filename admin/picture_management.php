@@ -9,8 +9,9 @@ if(!userisAdmin()){
 
 // picture deletion
 if(isset($_GET['action']) && $_GET['action'] == 'delete'){
-    $pdo->query("DELETE FROM picture
-    WHERE id_picture = $_GET[id_picture]");
+    $stmt = $pdo->prepare("DELETE FROM picture WHERE id_picture = :id_picture");
+    $stmt->bindParam(':id_picture', $_GET['id_picture'], PDO::PARAM_INT);
+    $stmt->execute();
 }
 
 // picture add
@@ -80,7 +81,13 @@ else{
 if($error === ''){
     global $img_bdd;
     $success .= '<div class="class="bg_green c_white p_1_2 m_tb_1 font_1_2"">Votre photo a bien été ajoutée</div>';
-    $pdo->query("INSERT INTO picture (title,description,link,id_theme) VALUES ('$title','$description','$img_bdd','$id_theme')");
+    $stmt = $pdo->prepare("INSERT INTO picture (title, description, link, id_theme) VALUES (:title, :description, :link, :id_theme)");
+    $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+    $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+    $stmt->bindParam(':link', $img_bdd, PDO::PARAM_STR);
+    $stmt->bindParam(':id_theme', $id_theme, PDO::PARAM_INT);
+    $stmt->execute();
+    
 }
 }
 ?>  
@@ -91,7 +98,8 @@ if($error === ''){
     <h3 class="font_2 m_tb_2">Modifier/Supprimer une des <?php $req=$pdo->query("SELECT * FROM picture ");echo $req->rowCount()?> Photos</h3>
 
     <?php
-    $req = $pdo->query("SELECT * FROM picture ");
+    $req = $pdo->prepare("SELECT * FROM picture");
+    $req->execute();    
     $donnee = $req->fetchALL(PDO::FETCH_ASSOC);
 
     echo '<table class="w_100 m_b_2 collapse">
@@ -110,7 +118,9 @@ if($error === ''){
             </thead>
             <tbody>';
     foreach ($donnee as $index => $value){
-        $reqTheme = $pdo->query("SELECT title FROM theme WHERE id_theme = '$value[id_theme]'");
+        $reqTheme = $pdo->prepare("SELECT title FROM theme WHERE id_theme = :id_theme");
+        $reqTheme->bindParam(':id_theme', $value['id_theme'], PDO::PARAM_INT);
+        $reqTheme->execute();
         $theme = $reqTheme->fetch(PDO::FETCH_ASSOC); 
         echo '<tr>';
             foreach ($value as $key => $data) {
@@ -134,8 +144,10 @@ if($error === ''){
         }
     echo '</tbody></table>';
 
-    $req_theme = $pdo->query("SELECT * FROM theme");
-    $themes = $req_theme->fetchAll(PDO::FETCH_ASSOC);
+    // Fetching all themes
+    $reqThemes = $pdo->prepare("SELECT * FROM theme");
+    $reqThemes->execute();
+    $themes = $reqThemes->fetchAll(PDO::FETCH_ASSOC);
 
     ?>
     

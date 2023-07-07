@@ -9,8 +9,9 @@ if(!userisAdmin()){
 
 // Theme deletion
 if(isset($_GET['action']) && $_GET['action'] == 'delete'){
-    $pdo->query("DELETE FROM theme
-    WHERE id_theme = $_GET[id_theme]");
+    $stmt = $pdo->prepare("DELETE FROM theme WHERE id_theme = :id_theme");
+    $stmt->bindParam(':id_theme', $_GET['id_theme'], PDO::PARAM_INT);
+    $stmt->execute();
 }
 
 // Theme add/update
@@ -75,7 +76,11 @@ if($_POST){
     if($error === ''){
         global $img_bdd;
         $success .= '<div class="bg_green c_white p_1_2 m_tb_1 font_1_2">Votre produit a bien été ajouté</div>';
-        $pdo->query("INSERT INTO theme (title,description,picture_link) VALUES ('$title','$description','$img_bdd')");
+        $stmt = $pdo->prepare("INSERT INTO theme (title, description, picture_link) VALUES (:title, :description, :img_bdd)");
+        $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+        $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+        $stmt->bindParam(':img_bdd', $img_bdd, PDO::PARAM_STR);
+        $stmt->execute();
     }
 }
 ?>  
@@ -85,7 +90,8 @@ if($_POST){
     <h3 class="font_2 m_tb_2">Modifier/Supprimer un des <?php $req=$pdo->query("SELECT * FROM theme ");echo $req->rowCount()?> Thèmes</h3>
     <!-- Themes chart -->
     <?php
-    $req = $pdo->query("SELECT * FROM theme ");
+    $req = $pdo->prepare("SELECT * FROM theme");
+    $req->execute();
     $donnee = $req->fetchALL(PDO::FETCH_ASSOC);
 
     echo '<table class="w_100 m_b_2 collapse">

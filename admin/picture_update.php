@@ -8,15 +8,18 @@ if(!userisAdmin()){
 };
 
 // Gathering picture related datas
-$req = $pdo->query("SELECT * FROM picture WHERE id_picture = $_GET[id_picture]");
-$data = $req->fetchAll();
+$stmt = $pdo->prepare("SELECT * FROM picture WHERE id_picture = :id_picture");
+$stmt->bindParam(':id_picture', $_GET['id_picture'], PDO::PARAM_INT);
+$stmt->execute();
+$data = $stmt->fetchAll();
 $data1 = $data[0][1];
 $data2 = $data[0][2];
 $data3 = $data[0][3];
 $data4 = $data[0][4];
 
-$req_themes = $pdo->query("SELECT * FROM theme");
-$themes = $req_themes->fetchAll(PDO::FETCH_ASSOC);
+$reqThemes = $pdo->prepare("SELECT * FROM theme");
+$reqThemes->execute();
+$themes = $reqThemes->fetchAll(PDO::FETCH_ASSOC);
 
 // Updating picture
 if($_POST){
@@ -78,7 +81,12 @@ if($_POST){
     if($error === ''){
         global $img_bdd;
         $success .= '<div class="bg_green c_white p_1_2 m_tb_1 font_1_2">Votre photo a bien été modifiée</div>';
-        $pdo->query("UPDATE picture SET title = '$title' ,description = '$description',link = '$img_bdd' WHERE id_picture =$_GET[id_picture]");
+        $stmt = $pdo->prepare("UPDATE picture SET title = :title, description = :description, link = :link WHERE id_picture = :id_picture");
+        $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+        $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+        $stmt->bindParam(':link', $img_bdd, PDO::PARAM_STR);
+        $stmt->bindParam(':id_picture', $_GET['id_picture'], PDO::PARAM_INT);
+        $stmt->execute();
         header('Refresh:3;url=picture_management.php');
     }
     }

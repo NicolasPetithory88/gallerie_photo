@@ -7,7 +7,9 @@ if(!userisAdmin()){
     exit();  
 };
 // Gathering theme data
-$req = $pdo->query("SELECT * FROM theme WHERE id_theme = $_GET[id_theme]");
+$req = $pdo->prepare("SELECT * FROM theme WHERE id_theme = :id_theme");
+$req->bindParam(':id_theme', $_GET['id_theme'], PDO::PARAM_INT);
+$req->execute();
 $data = $req->fetchAll();
 $data1 = $data[0][1];
 $data2 = $data[0][2];
@@ -73,7 +75,12 @@ if($_POST){
     if($error === ''){
         global $img_bdd;
         $success .= '<div class="bg_green c_white p_1_2 m_tb_1 font_1_2">Votre thème a bien été modifié</div>';
-        $pdo->query("UPDATE theme SET title = '$title' ,description = '$description',picture_link = '$img_bdd' WHERE id_theme =$_GET[id_theme]");
+        $stmt = $pdo->prepare("UPDATE theme SET title = :title, description = :description, picture_link = :img_bdd WHERE id_theme = :id_theme");
+        $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+        $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+        $stmt->bindParam(':img_bdd', $img_bdd, PDO::PARAM_STR);
+        $stmt->bindParam(':id_theme', $_GET['id_theme'], PDO::PARAM_INT);
+        $stmt->execute();
         header('Refresh:3;url=theme_management.php');
     }
     }

@@ -8,8 +8,9 @@
 
     // Member deletion
     if(isset($_GET['action']) && $_GET['action'] == 'delete'){
-        $pdo->query("DELETE FROM membre
-        WHERE id_membre = $_GET[id_membre]");
+        $stmt = $pdo->prepare("DELETE FROM membre WHERE id_membre = :id_membre");
+        $stmt->bindParam(':id_membre', $_GET['id_membre'], PDO::PARAM_INT);
+        $stmt->execute();
     }
 
     // Member status update
@@ -18,36 +19,7 @@
         foreach($_POST as $key => $value){
             $_POST[$key] = htmlspecialchars(addslashes($value));
         }
-/*    
-    if(!empty($_POST['nickname'])){
-        $nickname = $_POST['nickname'];
-    }
-    else{
-        $error .= '<div class="c_red font_1_2 m_tb_1">Le pseudo est obligatoire'.'</div>'; 
-    }
 
-    if(!empty($_POST['password'])){
-        if($_POST['password'] == $data2){
-            $passwordHash = $data2;
-        }
-        else{
-            $password = $_POST['password'];
-            $passwordHash = password_hash($password, PASSWORD_DEFAULT); 
-        }
-    }
-    else{
-        $error .= '<div class="c_red font_1_2 m_tb_1">Le mot de passe est obligatoire'.'</div>'; 
-    }
-    
-    
-    if(!empty($_POST['email'])){
-        $email = $_POST['email'];
-    }
-    else{
-        $error .= '<div class="c_red font_1_2 m_tb_1">Un email est obligatoire'.'</div>'; 
-    }
-    
-*/
         if(($_POST['status'] === "0" || $_POST['status'] === "1")){
             $status = $_POST['status'];      
         }
@@ -57,13 +29,10 @@
 
         if($error === ''){
        
-            $stmt = $pdo->prepare("UPDATE membre SET /*nickname = :nickname, password = :password, email = :email,*/ status = :status WHERE id_membre = :id_membre");
-            // $stmt->bindParam(':nickname', $nickname);
-            // $stmt->bindParam(':password', $passwordHash);
-            // $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':status', $status);
-            $stmt->bindParam(':id_membre', $_GET['id_membre']);
-            $stmt->execute();
+            $stmt2 = $pdo->prepare("UPDATE membre SET status = :status WHERE id_membre = :id_membre");
+            $stmt2->bindParam(':status', $status);
+            $stmt2->bindParam(':id_membre', $_GET['id_membre']);
+            $stmt2->execute();
             $success .= '<div class="bg_green c_white p_1_2 m_tb_1 font_1_2">Votre modification a bien été prise en compte</div>';
         }
     }
@@ -74,7 +43,8 @@
     <!-- Members chart -->
     <h3 class="font_2 m_tb_2">Modifier/Supprimer un membre</h3>
     <?php
-        $req = $pdo->query("SELECT * FROM membre ");
+        $req = $pdo->prepare("SELECT * FROM membre");
+        $req->execute();
         $donnee = $req->fetchALL(PDO::FETCH_ASSOC);
         echo '<table class="w_100 m_b_2 collapse">
         <thead class="bg_blue">';
@@ -106,8 +76,10 @@
 
         // Member update form
         if(isset($_GET['action']) && $_GET['action'] == 'update'){
-            $req = $pdo->query("SELECT * FROM membre WHERE id_membre = '".$_GET['id_membre']."'");
-            $data = $req->fetchAll();
+            $req = $pdo->prepare("SELECT * FROM membre WHERE id_membre = :id_membre");
+            $req->bindParam(':id_membre', $_GET['id_membre'], PDO::PARAM_INT);
+            $req->execute();
+            $data = $req->fetchAll(PDO::FETCH_ASSOC);
             $data1 = $data[0][1];
             $data2 = $data[0][2];
             $data3 = $data[0][3];
