@@ -99,14 +99,14 @@ if($error === ''){
     for ($i=0; $i < $req->columnCount(); $i++){
         $colone = $req->getColumnMeta($i);
         if ($colone['name'] == 'link'){
-        echo '<th class="text_left w_20">' .$colone['name'] . '</th>';
+        echo '<th class="p_l_1 text_left w_20">' .$colone['name'] . '</th>';
         }
         else{
-        echo '<th class="text_left">' .$colone['name'] . '</th>';
+        echo '<th class="p_l_1 text_left">' .$colone['name'] . '</th>';
         }
     }
-        echo '<th class="text_left">' .'modifier' . '</th>
-            <th class="text_left">' .'supprimer' . '</th>
+        echo '<th class="p_l_1 text_left">' .'modifier' . '</th>
+            <th class="p_l_1 text_left">' .'supprimer' . '</th>
             </thead>
             <tbody>';
     foreach ($donnee as $index => $value){
@@ -118,18 +118,18 @@ if($error === ''){
                     $id = $data;
                 }
                 if ($key == 'id_theme'){
-                    echo '<td>'. substr($theme['title'],0,20).'</td>'; 
+                    echo '<td class="p_l_1">'. substr($theme['title'],0,20).'</td>'; 
                 }
                 else if ($key == 'link'){
-                    echo '<td><img class="w_40 h_auto" src="'. $data.'"></td>';
+                    echo '<td class="p_l_1 line_h_1"><img class="h_5 w_auto" src="'. $data.'"></td>';
                 }
                 else{
-                    echo '<td>'. substr($data,0,20).'</td>';
+                    echo '<td class="p_l_1">'. substr($data,0,20).'</td>';
                 }
                         
             }
-            echo '<td><a class="decoration_none" href="http://localhost/PHP/gallerie_photo/admin/picture_update.php?id_picture='.$id.'">🖊️</a></td>';
-            echo '<td><a class="decoration_none" href="http://localhost/PHP/gallerie_photo/admin/picture_management.php?action=delete&id_picture='.$id.'" onclick="return confirmDelete();">🚮</a></td>'; 
+            echo '<td class="p_l_1"><a class="decoration_none" href="http://localhost/PHP/gallerie_photo/admin/picture_update.php?id_picture='.$id.'">🖊️</a></td>';
+            echo '<td class="p_l_1"><a class="decoration_none" href="http://localhost/PHP/gallerie_photo/admin/picture_management.php?action=delete&id_picture='.$id.'" onclick="return confirmDelete();">🚮</a></td>'; 
         echo '</tr>';
         }
     echo '</tbody></table>';

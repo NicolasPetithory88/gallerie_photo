@@ -11,7 +11,7 @@ require_once('init.php');
     <title>Les Voyages de Philippe</title>
     <link rel="stylesheet" href="./style.css?v=<?php echo time(); ?>">
 </head>
-<body class="bg_grey grace">
+<body class="bg_grey poppins">
     <div class="flex column min_h_100">
         <header class="flex bg_black p_2_1 poppins">
             <a class="c_grey decoration_none font_2" href="<?= URL?>index.php">Les Voyages de Philippe</a>
@@ -26,6 +26,7 @@ require_once('init.php');
                 <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/PHP/gallerie_photo/themes.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>themes.php">Thèmes</a>
                 <a class="c_grey decoration_none font_1_2" href="<?= URL?>connexion.php?action=deconnexion">Déconnexion</a>     
                 <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/PHP/gallerie_photo/unsubscribe.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>unsubscribe.php">Désinscription</a>
+                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/PHP/gallerie_photo/contact.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>contact.php">Contact</a>
 
             <?php else : ?>
                 <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/PHP/gallerie_photo/index.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>index.php">Accueil</a>

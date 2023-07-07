@@ -15,7 +15,7 @@ require_once('./inc/init.php');
         $reqTheme = $pdo->prepare("SELECT * FROM theme WHERE id_theme = :id_theme");
         $reqTheme->bindParam(':id_theme', $_GET['id_theme']);
         $reqTheme->execute();
-        $theme = $reqtheme->fetch(PDO::FETCH_ASSOC);
+        $theme = $reqTheme->fetch(PDO::FETCH_ASSOC);
         // Title and description
         echo '<h1 class="font_3">'.$theme['title'].'</h1>
               <p class="m_t_1 font_1_2">'.$theme['description'].'</p>

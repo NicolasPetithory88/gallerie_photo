@@ -45,28 +45,26 @@ if($_POST){
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':content', $content);
         $stmt->execute([':nickname' => $nickname,':email' => $email, ':content' => $content]);
-        $me = 'hpnyckit@gmail.com'; 
+        $me = 'lou518@wanadoo.fr'; 
         sendmymail('Les Voyages de Philippe', $email, 'Message de '.$nickname, $content);
         header('Refresh:3;url=index.php');
     }
     }
 ?>  
 
-<div class="flex column justify_center align_center flex_1">
+<div class="flex column justify_center align_center flex_1 p_2">
     
     <div class="flex w_100 space_around">
         <div class="flex column w_40">
             <h1 class="self_center m_b_2">Me Contacter</h1>
-            <p class="font_1_2" >Contactez-moi par téléphone ou en envoyant un message.</p>
-            <p class="font_1_2 m_b_2" >Philippe Petithory : 06 50 03 97 03</p>
             <!-- Contact form -->
             <form class="flex column" action="" method="POST"> 
 
                 <?= $error; ?>
                 <?= $success; ?>
 
-                <label class="m_b_05" for="nickname">Pseudo</label>
-                <input class="m_b_2 h_2" type="text" name="nickname" id="nickname" placeholder="&nbsp;&nbsp;Votre pseudo">
+                <label class="m_b_05" for="nickname">Nom</label>
+                <input class="m_b_2 h_2" type="text" name="nickname" id="nickname" placeholder="&nbsp;&nbsp;Votre nom">
                 
                 
                 <label class="m_b_05" for="email">Email</label>

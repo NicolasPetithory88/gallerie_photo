@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../style.css?v=<?php echo time(); ?>">
     <script src="../script.js"></script>
 </head>
-<body class="grace">
+<body class="poppins">
     
 <header class="flex gap_1 bg_black p_2_1 poppins c_grey">
     <a href="http://localhost/PHP/gallerie_photo/admin/dashboard.php"class="decoration_none c_grey font_2 m_r_2">BackOffice</a>

@@ -80,26 +80,26 @@
         <thead class="bg_blue">';
         for ($i=0; $i < $req->columnCount(); $i++){
             $colone = $req->getColumnMeta($i);
-            echo '<th class="text_left">' .$colone['name'] . '</th>';
+            echo '<th class="p_l_1 text_left">' .$colone['name'] . '</th>';
             }
-            echo '<th class="text_left">' .'modifier' . '</th>
-            <th class="text_left">' .'supprimer' . '</th>
+            echo '<th class="p_l_1 text_left">' .'modifier' . '</th>
+            <th class="p_l_1 text_left">' .'supprimer' . '</th>
             </thead>
             <tbody>';
             foreach ($donnee as $index => $value){
                 echo "<tr>";
             foreach ($value as $key => $data) {
                 if ($key == 'id_membre'){
-                    echo '<td>'. $data.'</td>';
+                    echo '<td class="p_l_1">'. $data.'</td>';
                     $id = $data;
                 }
                 else{
-                    echo '<td>'. $data.'</td>';
+                    echo '<td class="p_l_1">'. $data.'</td>';
                 }
                       
             }
-            echo '<td><a class="decoration_none" href="http://localhost/PHP/gallerie_photo/admin/membre_management.php?action=update&id_membre='.$id.'">🖊️</a></td>'; 
-            echo '<td><a class="decoration_none" href="http://localhost/PHP/gallerie_photo/admin/membre_management.php?action=delete&id_membre='.$id.'" onclick="return confirmDelete();">🚮</a></td>';
+            echo '<td class="p_l_1"><a class="decoration_none" href="http://localhost/PHP/gallerie_photo/admin/membre_management.php?action=update&id_membre='.$id.'">🖊️</a></td>'; 
+            echo '<td class="p_l_1"><a class="decoration_none" href="http://localhost/PHP/gallerie_photo/admin/membre_management.php?action=delete&id_membre='.$id.'" onclick="return confirmDelete();">🚮</a></td>';
             echo "</tr>";
         }
         echo '</tbody></table>';

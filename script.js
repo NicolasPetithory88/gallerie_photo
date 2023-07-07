@@ -24,6 +24,8 @@ autoCarousel();
 
 // Prevent Right Click
 
-// window.addEventListener('contextmenu', function (e) {
-//     e.preventDefault();
-// });
+window.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+});
+
+

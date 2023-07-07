@@ -7,7 +7,7 @@
     <title>Les Voyages de Philippe</title>
     <link rel="stylesheet" href="./style.css?v=<?php echo time(); ?>">
 </head>
-<body class="bg_grey grace">
+<body class="bg_grey poppins">
     <div class="flex column min_h_100">
     <?php
 

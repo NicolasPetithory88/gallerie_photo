@@ -93,14 +93,14 @@ if($_POST){
     for ($i=0; $i < $req->columnCount(); $i++){
         $colone = $req->getColumnMeta($i);
         if ($colone['name'] == 'picture_link'){
-            echo '<th class="text_left w_20">' .$colone['name'] . '</th>';
+            echo '<th class="p_l_1 text_left w_20">' .$colone['name'] . '</th>';
         }
         else {
-        echo '<th class="text_left">' .$colone['name'] . '</th>';
+        echo '<th class="p_l_1 text_left">' .$colone['name'] . '</th>';
         }
     }
-        echo '<th class="text_left">' .'modifier' . '</th>
-            <th class="text_left">' .'supprimer' . '</th>
+        echo '<th class="p_l_1 text_left">' .'modifier' . '</th>
+            <th class="p_l_1 text_left">' .'supprimer' . '</th>
             </thead>
             <tbody>';
     foreach ($donnee as $index => $value){
@@ -110,15 +110,15 @@ if($_POST){
                     $id = $data;
                 }
                 if ($key == 'picture_link'){
-                    echo '<td><img class="w_40 auto" src="'. $data.'"></td>';
+                    echo '<td class="p_l_1 line_h_1"><img class="h_5 w_auto" src="'. $data.'"></td>';
                 }
                 else{
-                    echo '<td>'. substr($data,0,20).'</td>';
+                    echo '<td class="p_l_1">'. substr($data,0,20).'</td>';
                 }
                         
             }
-            echo '<td><a class="decoration_none" href="http://localhost/PHP/gallerie_photo/admin/theme_update.php?id_theme='.$id.'">🖊️</a></td>';
-            echo '<td><a class="decoration_none" href="http://localhost/PHP/gallerie_photo/admin/theme_management.php?action=delete&id_theme='.$id.'" onclick="return confirmDelete();">🚮</a></td>'; 
+            echo '<td class="p_l_1"><a class="decoration_none" href="http://localhost/PHP/gallerie_photo/admin/theme_update.php?id_theme='.$id.'">🖊️</a></td>';
+            echo '<td class="p_l_1"><a class="decoration_none" href="http://localhost/PHP/gallerie_photo/admin/theme_management.php?action=delete&id_theme='.$id.'" onclick="return confirmDelete();">🚮</a></td>'; 
         echo '</tr>';
         }
     echo '</tbody></table>';
