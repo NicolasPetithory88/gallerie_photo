@@ -1,5 +1,6 @@
 <?php
 require_once('init.php');
+var_dump($_SERVER['PHP_SELF']);
 ?>  
 
 <!DOCTYPE html>
@@ -22,18 +23,18 @@ require_once('init.php');
             <?php endif ?> 
 
             <?php if(userConnected()): ?>
-                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/PHP/gallerie_photo/index.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>index.php">Accueil</a>
-                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/PHP/gallerie_photo/themes.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>themes.php">Thèmes</a>
+                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/index.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>index.php">Accueil</a>
+                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/themes.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>themes.php">Thèmes</a>
                 <a class="c_grey decoration_none font_1_2" href="<?= URL?>connexion.php?action=deconnexion">Déconnexion</a>     
-                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/PHP/gallerie_photo/unsubscribe.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>unsubscribe.php">Désinscription</a>
-                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/PHP/gallerie_photo/contact.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>contact.php">Contact</a>
+                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/unsubscribe.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>unsubscribe.php">Désinscription</a>
+                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/contact.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>contact.php">Contact</a>
 
             <?php else : ?>
-                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/PHP/gallerie_photo/index.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>index.php">Accueil</a>
-                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/PHP/gallerie_photo/subscription.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>subscription.php">Inscription</a> 
-                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/PHP/gallerie_photo/themes.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>themes.php">Thèmes</a>
-                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/PHP/gallerie_photo/connexion.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>connexion.php">Connexion</a>
-                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/PHP/gallerie_photo/contact.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>contact.php">Contact</a>
+                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/index.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>index.php">Accueil</a>
+                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/subscription.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>subscription.php">Inscription</a> 
+                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/themes.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>themes.php">Thèmes</a>
+                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/connexion.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>connexion.php">Connexion</a>
+                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/contact.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>contact.php">Contact</a>
                  
             <?php endif ?> 
             

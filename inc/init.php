@@ -17,10 +17,7 @@ $pdo = new PDO(
 $error = "";
 $success = "";
 
-define('URL2','http://localhost/php/');
-
-
 require_once('function.php');
 
-define('URL','http://localhost/PHP/gallerie_photo/');
+define('URL','https://www.nico.e-up.consulting');
 ?>
