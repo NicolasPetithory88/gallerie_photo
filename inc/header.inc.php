@@ -18,7 +18,7 @@ require_once('init.php');
             <nav class="flex wrap align_center gap_1 m_l_5">
 
                 <?php if(userisAdmin()): ?>   
-                <a class="c_grey decoration_none font_2" href="http://localhost/PHP/gallerie_photo/admin/dashboard.php">BACKOFFICE</a>
+                <a class="c_grey decoration_none font_2" href="<?= URL?>admin/dashboard.php">BACKOFFICE</a>
             <?php endif ?> 
 
             <?php if(userConnected()): ?>
