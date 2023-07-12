@@ -23,7 +23,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'unsubscribe'){
 
  
 <div class="flex column align_center m_tb_2 flex_1">
-    <h3 class="font_2 m_tb_2">Cliquez sur le bouton ci_dessous pour supprimer votre compte</h3>
+    <h3 class="font_2 m_tb_2">Cliquez sur le bouton ci-dessous pour supprimer votre compte</h3>
     <?= $success; ?>
 
     <a class="decoration_none self_center" href="unsubscribe.php?action=unsubscribe" onclick="confirmDelete()"> 

@@ -1,5 +1,5 @@
 <?php
-require_once('C:\wamp64\www\PHP\gallerie_photo\inc\init.php');
+require_once('../inc/init.php');
 require_once('../inc/topPageAdmin.php');
 ?>  
 
