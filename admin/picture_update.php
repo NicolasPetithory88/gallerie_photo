@@ -45,7 +45,7 @@ if($_POST){
     if($_FILES['link']['error']!==4){
 
         $nomImg = time().'_'. $_FILES['link']['name'];             
-        $img_bdd = URL2 . "ProjetBoutique/images_ref/$nomImg";
+        $img_bdd = URL . "/images_ref/$nomImg";
         define("BASE",$_SERVER['DOCUMENT_ROOT'].'/php/ProjetBoutique/'); 
         $img_doc = BASE."images_ref/$nomImg";
     
