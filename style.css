@@ -528,7 +528,7 @@ tbody tr:nth-of-type(even){
 #carousel{
     position: relative;
     width: 100%;
-    padding-bottom: 31%; /* Set the aspect ratio (16:9 for example) */
+    padding-bottom: 45%; 
     background-size: cover;
     background-position: center;
     background-image: url("./images_ref/1666340761_0033.jpg");

@@ -11,9 +11,9 @@ function confirmDelete() {
 // Carousel
 
 var autoCarousel = () => {setTimeout(() => {
-    var backgroundCollection = ['url("./images_ref/1666340701_0011.jpg")','url("./images_ref/1666340735_0022.jpg")','url("./images_ref/1666340761_0033.jpg")']
+    var backgroundCollection = ['url("./images_ref/carousel1.JPG")','url("./images_ref/carousel2.JPG")','url("./images_ref/carousel3.JPG")','url("./images_ref/carousel4.JPG")','url("./images_ref/carousel5.jpeg")']
     carousel.style.backgroundImage = backgroundCollection[x];
-    if(x<2){x+=1}else{x=0}
+    if(x<4){x+=1}else{x=0}
         
     autoCarousel()
 },5000);              
