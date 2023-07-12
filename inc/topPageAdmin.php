@@ -11,11 +11,13 @@
 <body class="poppins">
     
 <header class="flex gap_1 bg_black p_2_1 poppins c_grey">
-    <a href="<?= URL?>dashboard.php"class="decoration_none c_grey font_2 m_r_2">BackOffice</a>
+<a class="decoration_none font_2 c_grey m_r_2" href="<?= URL?>index.php" class="back-rubrique">Retour Accueil</a>
+    
     <nav class="flex gap_1 style_none align_center">
+        <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/admin/dashboard.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>admin/dashboard.php">BackOffice</a>
         <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/admin/theme_management.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>admin/theme_management.php">Gestion des thèmes</a>
         <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/admin/picture_management.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>admin/picture_management.php">Gestion des photos</a>
         <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/admin/membre_management.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>admin/membre_management.php">Gestion des membres</a>
-        <a class="decoration_none font_1_2 c_grey" href="<?= URL?>index.php" class="back-rubrique">Retour Accueil</a>
+        
     </nav>
 </header>
