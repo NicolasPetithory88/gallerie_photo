@@ -43,7 +43,7 @@ if($_POST){
 
         
         
-        $img_bdd = URL2 . "ProjetBoutique/images_ref/$nomImg";
+        $img_bdd = URL . "/images_ref/$nomImg";
 
         define("BASE",$_SERVER['DOCUMENT_ROOT'].'/php/ProjetBoutique/'); 
 

@@ -19,5 +19,5 @@ $success = "";
 
 require_once('function.php');
 
-define('URL','https://www.nico.e-up.consulting/');
+define('URL','https://www.nico.e-up.consulting');
 ?>
