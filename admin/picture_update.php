@@ -44,10 +44,13 @@ if($_POST){
      
     if($_FILES['link']['error']!==4){
 
-        $nomImg = time().'_'. $_FILES['link']['name'];             
+        $nomImg = time().'_'. $_FILES['link']['name'];  
+                   
         $img_bdd = URL . "/images_ref/$nomImg";
-        define("BASE",$_SERVER['DOCUMENT_ROOT'].'/php/ProjetBoutique/'); 
-        $img_doc = BASE."images_ref/$nomImg";
+
+        define("BASE",$_SERVER['DOCUMENT_ROOT']); 
+
+        $img_doc = BASE."/images_ref/$nomImg";
     
     
         if ($_FILES['link']['size'] <= 20000000){ 

@@ -39,8 +39,6 @@ if($_POST){
     if($_FILES['picture_link']['error']!==4){
 
         $nomImg = time().'_'. $_FILES['picture_link']['name']; 
-
-        
         
         $img_bdd = URL . "images_ref/$nomImg";
 
@@ -125,8 +123,8 @@ if($_POST){
                 }
                         
             }
-            echo '<td class="p_l_1"><a class="decoration_none" href="http://localhost/PHP/gallerie_photo/admin/theme_update.php?id_theme='.$id.'">🖊️</a></td>';
-            echo '<td class="p_l_1"><a class="decoration_none" href="http://localhost/PHP/gallerie_photo/admin/theme_management.php?action=delete&id_theme='.$id.'" onclick="return confirmDelete();">🚮</a></td>'; 
+            echo '<td class="p_l_1"><a class="decoration_none" href="'.URL.'admin/theme_update.php?id_theme='.$id.'">🖊️</a></td>';
+            echo '<td class="p_l_1"><a class="decoration_none" href="'.URL.'admin/theme_management.php?action=delete&id_theme='.$id.'" onclick="return confirmDelete();">🚮</a></td>'; 
         echo '</tr>';
         }
     echo '</tbody></table>';

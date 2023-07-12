@@ -41,8 +41,6 @@ if($_FILES['link']['error']!==4){
 
     $nomImg = time().'_'. $_FILES['link']['name']; 
 
-     
-    
     $img_bdd = URL . "images_ref/$nomImg";
 
     define("BASE",$_SERVER['DOCUMENT_ROOT']); 
@@ -138,8 +136,8 @@ if($error === ''){
                 }
                         
             }
-            echo '<td class="p_l_1"><a class="decoration_none" href="http://localhost/PHP/gallerie_photo/admin/picture_update.php?id_picture='.$id.'">🖊️</a></td>';
-            echo '<td class="p_l_1"><a class="decoration_none" href="http://localhost/PHP/gallerie_photo/admin/picture_management.php?action=delete&id_picture='.$id.'" onclick="return confirmDelete();">🚮</a></td>'; 
+            echo '<td class="p_l_1"><a class="decoration_none" href="'.URL.'admin/picture_update.php?id_picture='.$id.'">🖊️</a></td>';
+            echo '<td class="p_l_1"><a class="decoration_none" href="'.URL.'admin/picture_management.php?action=delete&id_picture='.$id.'" onclick="return confirmDelete();">🚮</a></td>'; 
         echo '</tr>';
         }
     echo '</tbody></table>';
