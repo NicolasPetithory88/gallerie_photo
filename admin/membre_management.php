@@ -68,8 +68,8 @@
                 }
                       
             }
-            echo '<td class="p_l_1"><a class="decoration_none" href="http://localhost/PHP/gallerie_photo/admin/membre_management.php?action=update&id_membre='.$id.'">🖊️</a></td>'; 
-            echo '<td class="p_l_1"><a class="decoration_none" href="http://localhost/PHP/gallerie_photo/admin/membre_management.php?action=delete&id_membre='.$id.'" onclick="return confirmDelete();">🚮</a></td>';
+            echo '<td class="p_l_1"><a class="decoration_none" href="'.URL.'admin/membre_management.php?action=update&id_membre='.$id.'">🖊️</a></td>'; 
+            echo '<td class="p_l_1"><a class="decoration_none" href="'.URL.'admin/membre_management.php?action=delete&id_membre='.$id.'" onclick="return confirmDelete();">🚮</a></td>';
             echo "</tr>";
         }
         echo '</tbody></table>';
@@ -91,16 +91,7 @@
             '.$error.'
             <form class="flex column w_50" action="" method="POST"> 
                 <legend class="m_b_05 font_1_2">Membre: '.$data1.'</legend>';
-/*    
-         <label class="m_b_05" for="nickname">Pseudo</label>
-         <input class="h_2 m_b_2" type="text" name="nickname" id="nickname" value="'.$data1.'">
- 
-         <label class="m_b_05" for="password">Mot de passe</label>
-         <input class="h_2 m_b_2" type="password" name="password" id="password" value="'.$data3.'">
- 
-         <label class="m_b_05" for="email">Email</label>
-         <input class="h_2 m_b_2" type="text" name="email" id="email" value="'.$data2.'">
-*/
+
                 echo'    
                 <legend class="m_b_05">Statut</legend>
                 <div class="flex gap_1 align_center m_b_2">';
