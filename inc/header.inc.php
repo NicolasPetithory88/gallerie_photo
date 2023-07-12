@@ -1,6 +1,5 @@
 <?php
 require_once('init.php');
-var_dump($_SERVER['PHP_SELF']);
 ?>  
 
 <!DOCTYPE html>
