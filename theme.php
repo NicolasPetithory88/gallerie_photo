@@ -4,7 +4,7 @@ require_once('./inc/init.php');
 ?>
 
 
-<div class="flex column align_center m_tb_2 flex_1">
+<div class="flex column align_center m_tb_2 flex_1 w_100">
     <?php
     // Redirect to main page if no id_theme was found in url
     if(!isset($_GET['id_theme'])){
@@ -19,17 +19,16 @@ require_once('./inc/init.php');
         // Title and description
         echo '<h1 class="font_3">'.$theme['title'].'</h1>
               <p class="m_t_1 font_1_2">'.$theme['description'].'</p>
-              <div class="flex wrap gap_1 w_100 justify_center m_tb_2">';
+              <div class="flex wrap gap_1 w_90 justify_center m_tb_2">';
         // Gathering theme's pictures
         $reqPictures = $pdo->prepare("SELECT * FROM picture WHERE id_theme = :id_theme");
         $reqPictures->bindParam(':id_theme', $_GET['id_theme']);
         $reqPictures->execute();
         $pictures = $reqPictures->fetchAll(PDO::FETCH_ASSOC);
         // Pictures display
-        foreach ($pictures as $key => $picture) { 
-            echo '<div class="w_20 h_15r flex justify_center">';
-                echo '<a href="picture.php?id_picture=' . $picture['id_picture'].'"><img class="w_auto h_100" src="'.$picture['link'].'"></a>
-            </div>';
+        foreach ($pictures as $key => $picture) {       
+                echo '<a href="picture.php?id_picture=' . $picture['id_picture'].'"><img class="w_auto h_15r" src="'.$picture['link'].'"></a>';
+            
         }    
         echo '</div>';    
     }
