@@ -5,9 +5,9 @@ session_start();
 <?php
 
 $pdo = new PDO(
-    "mysql:host=localhost;dbname=gallerie_photo",
-    "root",
-    "",
+    "mysql:host=eupconunico.mysql.db;dbname=eupconunico",
+    "eupconunico",
+    "1sW7YsITT406",
     array(
     PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
     PDO::MYSQL_ATTR_INIT_COMMAND =>'SET NAMES utf8')
