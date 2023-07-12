@@ -1,7 +1,6 @@
 <?php
 require_once('../inc/init.php');
 require_once('../inc/topPageAdmin.php');
-
 if(!userisAdmin()){
     header('Location: accueil.php');
     exit();  
@@ -43,11 +42,11 @@ if($_POST){
 
         
         
-        $img_bdd = URL . "/images_ref/$nomImg";
+        $img_bdd = URL . "images_ref/$nomImg";
 
-        define("BASE",$_SERVER['DOCUMENT_ROOT'].'/php/ProjetBoutique/'); 
+        define("BASE",$_SERVER['DOCUMENT_ROOT']); 
 
-        $img_doc = BASE."images_ref/$nomImg";
+        $img_doc = BASE."/images_ref/$nomImg";
 
 
         if ($_FILES['picture_link']['size'] <= 20000000){ 

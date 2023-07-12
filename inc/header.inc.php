@@ -8,13 +8,13 @@ require_once('init.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Philippe Petithory | Photographe</title>
+    <title>Philippe Petithory Photographe</title>
     <link rel="stylesheet" href="./style.css?v=<?php echo time(); ?>">
 </head>
 <body class="bg_grey poppins">
     <div class="flex column min_h_100">
         <header class="flex bg_black p_2 poppins space_between">
-            <a class="c_grey decoration_none font_2" href="<?= URL?>index.php">Philippe Petithory | Photographe</a>
+            <a class="c_grey decoration_none font_2" href="<?= URL?>index.php">Philippe Petithory Photographe</a>
             <nav class="flex wrap align_center gap_1 m_l_5">
 
                 <?php if(userisAdmin()): ?>   
