@@ -48,9 +48,9 @@ if($_POST){
                    
         $img_bdd = URL . "/images_ref/$nomImg";
 
-        define("BASE",$_SERVER['DOCUMENT_ROOT']); 
+        define("BASE",$_SERVER['DOCUMENT_ROOT'].'/PHP/gallerie_photo_local/'); 
 
-        $img_doc = BASE."/images_ref/$nomImg";
+        $img_doc = BASE."images_ref/$nomImg";
     
     
         if ($_FILES['link']['size'] <= 20000000){ 
