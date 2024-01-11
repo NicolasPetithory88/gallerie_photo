@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./style.css?v=<?php echo time(); ?>">
 </head>
 <body class="bg_grey poppins">
-    <div class="flex column min_h_100">
+    <div class="flex column h_100 min_h_100">
     <?php
 
     require_once('./inc/init.php');
@@ -86,9 +86,9 @@
         }
     }
     ?>
-
-    <div class="flex column align_center m_tb_2 flex_1">
-        <!-- Page display -->
+    <!-- Page display -->
+    <div class="flex column align_center m_t_2 h_100">
+        
         <?php
         if (!isset($_GET['id_picture'])) {
             header('Location:index.php');
@@ -123,11 +123,11 @@
             }        
 
             // current picture display
-            echo '<img class="w_60 h_auto m_t_2 border_1_black" src="' . $currentPicture['link'] . '" width="200px">';
+            echo '<img class="w_auto h_80vh max_w_100 m_t_2 border_05_black" src="' . $currentPicture['link'] . '" width="200px">';
 
             // Picture title
             if($currentPicture['title'] != ''){
-            echo '<p class="font_1_2 bold w_60 bg_black c_grey text_center p_b_1">' . $currentPicture['title'] . '</p>';
+            echo '<p class="font_1_2 bold w_auto m_t_1 text_center p_b_1">' . $currentPicture['title'] . '</p>';
             }
            
             // next picture arrow management
@@ -138,37 +138,24 @@
             // picture description
             echo '
             <p class="m_tb_2 font_1_2">' . $currentPicture['description'] . '</p>'.$error;
-            
+
+            // go back button 
+            echo '<a class="close_button absolute top_80 right_4" href="theme.php?id_theme='.$idTheme.'">&#10005;</a>';
+            echo '</div>';
+            var_dump($idTheme);
         }
         
-    // Add a comment    
-        if(!isset($_GET['action'])){
-            if(userConnected()){
-                echo '<form class="flex column w_50" action="" method="POST"> 
-    
-                    <textarea class="p_1" name="content" id="content" cols="30" rows="8" placeholder="Ajouter un commentaire"></textarea>
-    
-                    <button class="self_center m_tb_2" type="submit">
-                        Ajouter
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-    
-                </form>';
-            }
-            else{  
-                echo '<p class="m_b_2"><a class="decoration_none c_black bold" href="connexion.php">Connectez-vous</a> pour ajouter un commentaire</p>';           
-            }
-        }
+    // Fetch comments and comments data
+    $reqComments = $pdo->prepare("SELECT * FROM comment WHERE id_picture = :currentPictureId ORDER BY created_at DESC");
+    $reqComments->bindParam(':currentPictureId', $currentPictureId);
+    $reqComments->execute();
+    $comments = $reqComments->fetchAll(PDO::FETCH_ASSOC);
+
+    echo '<div class="flex column align_center m_b_2">';
+
         
     // Display Comments
-        // Fetch comments and comments data
-        $reqComments = $pdo->prepare("SELECT * FROM comment WHERE id_picture = :currentPictureId ORDER BY created_at DESC");
-        $reqComments->bindParam(':currentPictureId', $currentPictureId);
-        $reqComments->execute();
-        $comments = $reqComments->fetchAll(PDO::FETCH_ASSOC);
+        
         echo '<div class="w_50 flex column">
 
         <h3 class="m_b_1 self_center">'.$reqComments->rowCount().' commentaires</h3>';
@@ -209,23 +196,29 @@
             }
             echo '</div></div>';
         }
-        echo '</div>';
+     
+     // Add a comment       
+     if(!isset($_GET['action'])){
+        if(userConnected()){
+            echo '<form class="flex column w_50 self_center" action="" method="POST"> 
 
-    ?>
-        <!-- go back button -->
-        <a class="close_button absolute top_80 right_4" href="theme.php?id_theme=<?=$idTheme?>">&#10005;</a>
+                <textarea class="p_1" name="content" id="content" cols="30" rows="8" placeholder="Ajouter un commentaire"></textarea>
 
-        <!-- <a class="decoration_none c_grey m_t_2" href="theme.php?id_theme=<?=$idTheme?>">
-            <button>
-                Retour au thème
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </a> -->
+                <button class="self_center m_tb_2" type="submit">
+                    Ajouter
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
 
-    <?php
+            </form>';
+        }
+        else{  
+            echo '<p class="m_b_2"><a class="decoration_none c_black bold" href="connexion.php">Connectez-vous</a> pour ajouter un commentaire</p>';           
+        }
+    }
+    echo '</div>';
     require_once('./inc/bottomPage.inc.php');
     ?>
 

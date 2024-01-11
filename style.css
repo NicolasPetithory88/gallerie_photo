@@ -79,6 +79,10 @@ body, html {
     width: 100%;
 }
 
+.w_90{
+    width: 90%;
+}
+
 .w_80{
     width: 80%;
 }
@@ -111,6 +115,18 @@ body, html {
     height: 100%;
 }
 
+.h_80vh{
+    height : 80vh;
+}
+
+.h_100vh{
+    height : 100vh;
+}
+
+.h_80{
+    height: 80%;
+}
+
 .h_60{
     height: 60%;
 }
@@ -137,6 +153,10 @@ body, html {
 
 .h_15r{
     height: 15rem;
+}
+
+.h_35r{
+    height: 35rem;
 }
 
 .h_50r{
@@ -399,6 +419,10 @@ color :#bab2b5;
     border: 1rem solid black;
 }
 
+.border_05_black{
+    border: 0.5rem solid black;
+}
+
 .font_08{
     font-size: 0.8rem;
 }
@@ -543,7 +567,7 @@ tbody tr:nth-of-type(even){
 #carousel{
     position: relative;
     width: 100%;
-    padding-bottom: 45%; 
+    padding-bottom: 55%; 
     background-size: cover;
     background-position: center;
     background-image: url("./images_ref/carousel5.jpeg");
