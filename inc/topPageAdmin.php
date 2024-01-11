@@ -15,6 +15,7 @@
     
     <nav class="flex gap_1 style_none align_center">
         <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/admin/dashboard.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>admin/dashboard.php">BackOffice</a>
+        <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/admin/category_management.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>admin/category_management.php">Gestion des catégories</a>
         <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/admin/theme_management.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>admin/theme_management.php">Gestion des thèmes</a>
         <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/admin/picture_management.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>admin/picture_management.php">Gestion des photos</a>
         <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/admin/membre_management.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>admin/membre_management.php">Gestion des membres</a>

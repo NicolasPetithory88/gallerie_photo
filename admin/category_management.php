@@ -6,33 +6,27 @@ if(!userisAdmin()){
     exit();  
 };
 
-// Theme deletion
+// Category deletion
 if(isset($_GET['action']) && $_GET['action'] == 'delete'){
-    $stmt = $pdo->prepare("DELETE FROM theme WHERE id_theme = :id_theme");
-    $stmt->bindParam(':id_theme', $_GET['id_theme'], PDO::PARAM_INT);
+    $stmt = $pdo->prepare("DELETE FROM category WHERE id_category = :id_category");
+    $stmt->bindParam(':id_category', $_GET['id_category'], PDO::PARAM_INT);
     $stmt->execute();
 }
 
-// Theme add/update
+// Category add/update
 if($_POST){
     foreach($_POST as $key => $value){
         $_POST[$key] = htmlspecialchars(addslashes($value));
     }
 
-    if(!empty($_POST['title'])){
-        $title = $_POST['title'];
+
+    if(!empty($_POST['category_name'])){
+        $category_name = $_POST['category_name'];
     }
     else{
-        $error .= '<div class="c_red font_1_2 m_tb_1">Le titre est obligatoire'.'</div>'; 
+        $error .= '<div class="c_red font_1_2 m_tb_1">Le nom de la catégory est obligatoire'.'</div>'; 
     }
 
-
-    if(!empty($_POST['description'])){
-        $description = $_POST['description'];
-    }
-    else{
-        $description = ''; 
-    }
 
 
     if($_FILES['picture_link']['error']!==4){
@@ -67,21 +61,14 @@ if($_POST){
         $error .= '<div class="c_red font_1_2 m_tb_1">L\'image est obligatoire'.'</div>'; 
     }
 
-    if(!empty($_POST['id_category'])){
-        $id_category = $_POST['id_category'];
-    }
-    else{
-        $error .= '<div class="c_red font_1_2 m_tb_1">La catégorie est obligatoire'.'</div>'; 
-    }
+
 
     if($error === ''){
         global $img_bdd;
-        $success .= '<div class="bg_green c_white p_1_2 m_tb_1 font_1_2">Votre thème a bien été ajouté</div>';
-        $stmt = $pdo->prepare("INSERT INTO theme (title, description, picture_link, id_category) VALUES (:title, :description, :img_bdd, :id_category)");
-        $stmt->bindParam(':title', $title, PDO::PARAM_STR);
-        $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+        $success .= '<div class="bg_green c_white p_1_2 m_tb_1 font_1_2">Votre catégorie a bien été ajoutée</div>';
+        $stmt = $pdo->prepare("INSERT INTO category (category_name, category_picture) VALUES (:category_name, :img_bdd)");
+        $stmt->bindParam(':category_name', $category_name, PDO::PARAM_STR);
         $stmt->bindParam(':img_bdd', $img_bdd, PDO::PARAM_STR);
-        $stmt->bindParam(':id_category', $id_category, PDO::PARAM_INT);
         $stmt->execute();
     }
 }
@@ -89,10 +76,10 @@ if($_POST){
 
 <div class="flex column align_center p_1">
 
-    <h3 class="font_2 m_tb_2">Modifier/Supprimer un des <?php $req=$pdo->query("SELECT * FROM theme ");echo $req->rowCount()?> Thèmes</h3>
-    <!-- Themes chart -->
+    <h3 class="font_2 m_tb_2">Modifier/Supprimer une des <?php $req=$pdo->query("SELECT * FROM category ");echo $req->rowCount()?> Catégories</h3>
+    <!-- Categories chart -->
     <?php
-    $req = $pdo->prepare("SELECT * FROM theme");
+    $req = $pdo->prepare("SELECT * FROM category");
     $req->execute();
     $donnee = $req->fetchALL(PDO::FETCH_ASSOC);
 
@@ -100,7 +87,7 @@ if($_POST){
             <thead class="bg_blue">';
     for ($i=0; $i < $req->columnCount(); $i++){
         $colone = $req->getColumnMeta($i);
-        if ($colone['name'] == 'picture_link'){
+        if ($colone['name'] == 'category_picture'){
             echo '<th class="p_l_1 text_left w_20">' .$colone['name'] . '</th>';
         }
         else {
@@ -114,56 +101,35 @@ if($_POST){
     foreach ($donnee as $index => $value){
         echo '<tr>';
             foreach ($value as $key => $data) {
-                if ($key == 'id_theme'){
+                if ($key == 'id_category'){
                     $id = $data;
                 }
-                if ($key == 'picture_link'){
+                if ($key == 'category_picture'){
                     echo '<td class="p_l_1 line_h_1"><img class="h_5 w_auto" src="'. $data.'"></td>';
-                }
-                else if ($key == 'description' && !$data){
-                    echo '<td class="p_l_1"></td>';
                 }
                 else{
                     echo '<td class="p_l_1">' . (isset($data) ? substr($data, 0, 20) : '') . '</td>';
                 }
                         
             }
-            echo '<td class="p_l_1"><a class="decoration_none" href="'.URL.'admin/theme_update.php?id_theme='.$id.'">🖊️</a></td>';
-            echo '<td class="p_l_1"><a class="decoration_none" href="'.URL.'admin/theme_management.php?action=delete&id_theme='.$id.'" onclick="return confirmDelete();">🚮</a></td>'; 
+            echo '<td class="p_l_1"><a class="decoration_none" href="'.URL.'admin/category_update.php?id_category='.$id.'">🖊️</a></td>';
+            echo '<td class="p_l_1"><a class="decoration_none" href="'.URL.'admin/category_management.php?action=delete&id_category='.$id.'" onclick="return confirmDelete();">🚮</a></td>'; 
         echo '</tr>';
         }
     echo '</tbody></table>';
 
-    // Fetching all categories
-    $reqCategories = $pdo->prepare("SELECT * FROM category");
-    $reqCategories->execute();
-    $categories = $reqCategories->fetchAll(PDO::FETCH_ASSOC);
-
     ?>
-
     <?= $error; ?>
     <?= $success; ?>
-    <h3 class="font_2">Ajouter un thème</h3>
-    <!-- Theme add form -->
+    <h3 class="font_2">Ajouter une catégorie</h3>
+    <!-- Category add form -->
     <form class="flex column w_50" action="" method="POST" enctype="multipart/form-data"> 
 
-        <label class="m_b_05" for="title">Titre</label>
-        <input class="h_2 m_b_2" type="text" name="title" id="title" placeholder="&nbsp;&nbsp;Votre titre">
-
-        <label class="m_b_05" for="description">Description</label>
-        <textarea class=" m_b_2" name="description" id="description" cols="30" rows="10" placeholder="&nbsp;description"></textarea>
+        <label class="m_b_05" for="category_name">Nom de la catégorie</label>
+        <input class="h_2 m_b_2" type="text" name="category_name" id="category_name" placeholder="&nbsp;&nbsp;Nom de la catégorie">
 
         <label class="m_b_05" for="picture_link">Image vitrine</label>
         <input class="h_2 m_b_2" type="file" name="picture_link" id="picture_link" placeholder="&nbsp;&nbsp;Votre image">
-
-        <legend class="m_b_05">Catégorie</legend>
-        <select class="h_2 m_b_2" name="id_category" id="id_category">
-    <?php
-        foreach ($categories as $index => $value){
-            echo '<option value="'.$value['id_category'].'">'.$value['category_name'].'</option>';
-        }
-    ?>
-        </select>
 
         <button class="self_center" type="submit">
             Ajouter

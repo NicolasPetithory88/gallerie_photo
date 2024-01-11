@@ -23,15 +23,15 @@ require_once('init.php');
 
             <?php if(userConnected()): ?>
                 <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/index.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>index.php">Accueil</a>
-                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/themes.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>themes.php">Thèmes</a>
+                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/categories.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>categories.php">Photos</a>
                 <a class="c_grey decoration_none font_1_2" href="<?= URL?>connexion.php?action=deconnexion">Déconnexion</a>     
                 <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/unsubscribe.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>unsubscribe.php">Désinscription</a>
                 <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/contact.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>contact.php">Contact</a>
 
             <?php else : ?>
                 <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/index.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>index.php">Accueil</a>
+                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/categories.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>categories.php">Photos</a>
                 <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/subscription.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>subscription.php">Inscription</a> 
-                <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/themes.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>themes.php">Thèmes</a>
                 <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/connexion.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>connexion.php">Connexion</a>
                 <a class="decoration_none font_1_2<?= ($_SERVER['PHP_SELF'] === '/contact.php') ? ' c_red' : ' c_grey' ?>" href="<?= URL?>contact.php">Contact</a>
                  

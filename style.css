@@ -70,6 +70,9 @@ body, html {
     text-align: center;
 }
 
+.display-block{
+    display: block;
+}
 /* WIDTH HEIGHT */
 
 .w_100{
@@ -106,6 +109,10 @@ body, html {
 
 .h_100{
     height: 100%;
+}
+
+.h_60{
+    height: 60%;
 }
 
 .h_40{
@@ -152,8 +159,16 @@ body, html {
     max-height: 15rem;
 }
 
+.max_h_60{
+    max-height: 60%;
+}
+
 .max_w_20{
     max-width: 20%;
+}
+
+.max_w_60{
+    max-width: 60%;
 }
 
 .max_w_100{
